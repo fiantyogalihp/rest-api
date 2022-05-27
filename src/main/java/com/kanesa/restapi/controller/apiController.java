@@ -13,6 +13,9 @@ public class apiController {
 
   @GetMapping("/hello")
   public ResponseEntity<hello> getHello() {
+    hello h = new hello();
+    h.setName("bapak raka");
+
     return new ResponseEntity<hello>(new hello(), HttpStatus.INTERNAL_SERVER_ERROR);
   }
 }

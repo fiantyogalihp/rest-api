@@ -8,8 +8,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class hello {
-
   private int id = 01;
   private String name = "bapak budi";
   private String desc = "ya tau aja";
+
+  public hello(String name) {
+    this.name = name;
+  }
 }
