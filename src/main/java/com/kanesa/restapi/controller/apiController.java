@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("/api")
 public class apiController {
 
-  @GetMapping
+  @GetMapping("/hello")
   public ResponseEntity<hello> getHello() {
     return new ResponseEntity<hello>(new hello(), HttpStatus.INTERNAL_SERVER_ERROR);
   }
