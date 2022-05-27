@@ -1,4 +1,5 @@
-package com.kanesa.restapi.product_api.model;
+// ! Database model !!
+package com.kanesa.restapi.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-// ! Database model
 public class product {
   private long id;
   private String name;
