@@ -1,7 +1,7 @@
-package com.kanesa.restapi.product_impl.repository;
+// package com.kanesa.restapi.product_impl.repository;
 
-public interface crudRepository // extends
-{
+// public interface crudRepository // extends
+// {
 
-}
+// }
 
