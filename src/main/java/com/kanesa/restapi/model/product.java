@@ -16,7 +16,7 @@ public class product {
 
 
   // * constructor as a overloading
-  // * this as a @NoArgsConstructor
+  // * this as a @AllArgsConstructor
   // public product(long id, String name, String desc, int price) {
   // this.id = id;
   // this.name = name;
@@ -24,6 +24,6 @@ public class product {
   // this.price = price;
   // }
 
-  // * this as a @AllArgsConstructor
+  // * this as a @NoArgsConstructor
   // public product() {}
 }
