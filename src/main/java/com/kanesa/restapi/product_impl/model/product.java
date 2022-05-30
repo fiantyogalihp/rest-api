@@ -1,5 +1,5 @@
 // ! Database model !!
-package com.kanesa.restapi.model;
+package com.kanesa.restapi.product_impl.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
