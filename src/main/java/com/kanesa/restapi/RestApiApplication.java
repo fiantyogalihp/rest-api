@@ -11,15 +11,15 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@EnableSwagger2
 @Configuration
+@EnableSwagger2
 public class RestApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RestApiApplication.class, args);
 	}
 
-	// * default swagger configuration for documentation
+	// * default swagger and configuration for documentation
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
