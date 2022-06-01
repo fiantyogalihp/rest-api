@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 // ! client model
 public class outputProduct {
+  private long id;
   private String name;
   private String desc;
   private int price;
