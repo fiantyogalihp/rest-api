@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @Builder
 // ! client model
 public class outputProduct {
