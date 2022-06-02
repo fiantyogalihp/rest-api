@@ -1,0 +1,7 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "maven.view": "hierarchical",
+  "java.format.settings.url": ".vscode/eclipse-java-google-style.xml",
+  "better-comments.highlightPlainText": true,
+  "better-comments.multilineComments": true,
+}
