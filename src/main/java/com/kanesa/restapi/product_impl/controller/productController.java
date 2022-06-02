@@ -1,5 +1,6 @@
 package com.kanesa.restapi.product_impl.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -28,17 +29,17 @@ public class productController {
   @Autowired
   productService service;
 
-  // @GetMapping(value = "/product_example")
-  // // * 'cause product is many(list of product) we use List<product> type data
-  // public ResponseEntity<List<outputProduct>> getProducts() {
+  @GetMapping(value = "/product_example")
+  // * 'cause product is many(list of product) we use List<product> type data
+  public ResponseEntity<List<outputProduct>> getProducts() {
 
-  // // * add a new item
-  // List<outputProduct> products = new ArrayList<>();
-  // products.add(new outputProduct(1, "sapu", "kondisi: new", 10000));
-  // products.add(new outputProduct(2, "sulak wulu", "kondisi: second", 6000));
+    // * add a new item
+    List<outputProduct> products = new ArrayList<>();
+    products.add(new outputProduct(1, "sapu", "kondisi: new", 10000));
+    products.add(new outputProduct(2, "sulak wulu", "kondisi: second", 6000));
 
-  // return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
-  // }
+    return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
+  }
 
   @GetMapping(value = "/products/{id}")
   public ResponseEntity<baseResponse<outputProduct>> getDetailProduct(@PathVariable long id) {
