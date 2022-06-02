@@ -1,12 +1,14 @@
 package com.kanesa.restapi.product_impl.controller;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.validation.Valid;
 
 import com.kanesa.restapi.product_api.dto.request.inputProduct;
 import com.kanesa.restapi.product_api.dto.response.outputProduct;
 import com.kanesa.restapi.product_api.service.productService;
 import com.kanesa.restapi.standard_response.model.baseResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,17 +28,17 @@ public class productController {
   @Autowired
   productService service;
 
-  @GetMapping(value = "/product_example")
-  // * 'cause product is many(list of product) we use List<product> type data
-  public ResponseEntity<List<outputProduct>> getProducts() {
+  // @GetMapping(value = "/product_example")
+  // // * 'cause product is many(list of product) we use List<product> type data
+  // public ResponseEntity<List<outputProduct>> getProducts() {
 
-    // * add a new item
-    List<outputProduct> products = new ArrayList<>();
-    products.add(new outputProduct(1, "sapu", "kondisi: new", 10000));
-    products.add(new outputProduct(2, "sulak wulu", "kondisi: second", 6000));
+  // // * add a new item
+  // List<outputProduct> products = new ArrayList<>();
+  // products.add(new outputProduct(1, "sapu", "kondisi: new", 10000));
+  // products.add(new outputProduct(2, "sulak wulu", "kondisi: second", 6000));
 
-    return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
-  }
+  // return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
+  // }
 
   @GetMapping(value = "/products/{id}")
   public ResponseEntity<baseResponse<outputProduct>> getDetailProduct(@PathVariable long id) {
@@ -59,7 +61,7 @@ public class productController {
 
   @PostMapping(value = "/products/add")
   public ResponseEntity<baseResponse<outputProduct>> addProduct(
-      @RequestBody inputProduct inputproduct) {
+      @Valid @RequestBody inputProduct inputproduct) {
     outputProduct product = service.addOne(inputproduct);
 
     baseResponse<outputProduct> response = new baseResponse<>();
@@ -103,7 +105,7 @@ public class productController {
   }
 
   @PatchMapping(value = "/products/{id}", consumes = "application/json")
-  public ResponseEntity<baseResponse<outputProduct>> updateProduct(@PathVariable long id,
+  public ResponseEntity<baseResponse<outputProduct>> updateProduct(@Valid @PathVariable long id,
       @RequestBody inputProduct inputproduct) {
     outputProduct product = service.updateOne(id, inputproduct);
 
