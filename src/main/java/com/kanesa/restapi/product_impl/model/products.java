@@ -1,15 +1,23 @@
 // ! Database model !!
 package com.kanesa.restapi.product_impl.model;
 
+// import java.sql.Date;
+// import java.time.Instant;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +28,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity
+@EnableJpaAuditing
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "products")
 public class products {
 
@@ -27,17 +37,19 @@ public class products {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "name")
+  @Column(name = "name", nullable = false, updatable = true)
   private String name;
+  @Column(name = "desc", updatable = true)
   private String desc;
+  @Column(name = "price", nullable = false, updatable = true)
   private int price;
 
-  @CreatedDate()
-  @Column(name = "created_at")
+  @CreationTimestamp
+  @Column(name = "created_at", updatable = false)
   private Date created_at;
 
-  @LastModifiedDate()
-  @Column(name = "updated_at")
+  @UpdateTimestamp
+  @Column(name = "updated_at", updatable = true)
   private Date updated_at;
 
 
