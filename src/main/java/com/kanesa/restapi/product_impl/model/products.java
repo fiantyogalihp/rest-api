@@ -12,7 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import javax.validation.constraints.NotEmpty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -37,10 +37,14 @@ public class products {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @Column(name = "name", nullable = false, updatable = true)
+  @NotEmpty(message = "Product 'name' is required!")
+  @Column(name = "name", updatable = true)
   private String name;
+
   @Column(name = "desc", updatable = true)
   private String desc;
+
+  @NotEmpty(message = "Product 'name' is required!")
   @Column(name = "price", nullable = false, updatable = true)
   private int price;
 
