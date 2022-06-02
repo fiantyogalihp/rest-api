@@ -61,6 +61,13 @@
 			<version>1.18.24</version>
 		</dependency>
 
+		<!-- * model mapper -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
 		<!-- * if we must import from other module, we must to make that module(imported module) be a <dependency> / library-->
 
 	</dependencies>

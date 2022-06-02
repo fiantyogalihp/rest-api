@@ -11,6 +11,7 @@ import com.kanesa.restapi.product_api.dto.response.outputProduct;
 import com.kanesa.restapi.product_api.service.productService;
 import com.kanesa.restapi.product_impl.model.products;
 import com.kanesa.restapi.product_impl.repository.productRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,19 +36,25 @@ public class productImplService implements productService {
   @Autowired
   productRepository product_repository;
 
+  @Autowired
+  ModelMapper mapper;
+
   @Override
   public outputProduct addOne(inputProduct inputproduct) {
 
     // * convert the inputProduct's model to products's model
-    products product = products.builder().name(inputproduct.getName())
-        .price(inputproduct.getPrice()).desc(inputproduct.getDesc()).build();
+    products product = mapper.map(inputproduct, products.class);
+    // products product = products.builder().name(inputproduct.getName())
+    // .price(inputproduct.getPrice()).desc(inputproduct.getDesc()).build();
 
     // * add to DB use method "save()"
     this.product_repository.save(product);
 
+    // * convert the products's model to outputProduct's model
     // * return the reponse (outputProduct)
-    return outputProduct.builder().id(product.getId()).name(product.getName())
-        .desc(product.getDesc()).price(product.getPrice()).build();
+    return mapper.map(product, outputProduct.class);
+    // return outputProduct.builder().id(product.getId()).name(product.getName())
+    // .desc(product.getDesc()).price(product.getPrice()).build();
   }
 
   @Override
@@ -71,7 +78,7 @@ public class productImplService implements productService {
     products result = resultTemp.get();
 
     // * [Mapping] convert the the model of 'result' to the model of 'outputProduct'
-    // ? tips? use a builder for mapping to easier
+    // ? tips? use a modelMapper, or builder for mapping to easier
     // * manually
     /*
      * outputProduct outputproduct = new outputProduct(); outputproduct.setId(result.getId());
@@ -80,41 +87,22 @@ public class productImplService implements productService {
      */
 
     // * return the data of model 'output_product' with builder
-    return outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
-        .price(result.getPrice()).build();
+    return mapper.map(result, outputProduct.class);
+    // return
+    // outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
+    // .price(result.getPrice()).build();
   }
 
   @Override
   public List<outputProduct> getAll() {
 
-
     List<outputProduct> result = new ArrayList<>();
     this.product_repository.findAll().forEach(p -> {
-      result.add(outputProduct.builder().id(p.getId()).name(p.getName()).desc(p.getDesc())
-          .price(p.getPrice()).build());
+      result.add(mapper.map(p, outputProduct.class));
+      // result.add(outputProduct.builder().id(p.getId()).name(p.getName()).desc(p.getDesc())
+      // .price(p.getPrice()).build());
     });
 
-
-    // List<outputProduct> result = outputProduct.builder()
-    // this.product_repository.findAll();
-
-    // if (result.isEmpty()) {
-    // System.out.println("The Data isn't exist");
-    // return null;
-    // }
-
-
-    // Iterable<products> resultTIterable = Arrays.asList(this.product_repository.findAll());
-    // List<outputProduct> result = resultTIterable.forEach((p) ->
-    // products.builder().id(p.getId()).name(p.getName()).desc(p.getDesc())
-    // .price(p.getPrice()).build());
-    // List<products> resultList = Streamable.of(resultTIterable).toList();
-    // products result = resultTIterable.iterator().next();
-
-    // List<products> resultList = (List<products>) resultTIterable;
-    // return
-    // outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
-    // .price(result.getPrice()).build();
     return result;
   }
 
@@ -127,15 +115,15 @@ public class productImplService implements productService {
       System.out.println("The Data isn't exist");
       return null;
     }
-
     products result = resultTemp.map(oldItem -> {
       oldItem.setName(newItem.getName());
       oldItem.setDesc(newItem.getDesc());
       oldItem.setPrice(newItem.getPrice());
       return oldItem;
     }).orElseGet(() -> {
-      return products.builder().name(newItem.getName()).desc(newItem.getDesc())
-          .price(newItem.getPrice()).build();
+      return mapper.map(newItem, products.class);
+      // return products.builder().name(newItem.getName()).desc(newItem.getDesc())
+      // .price(newItem.getPrice()).build();
     });
 
     this.product_repository.save(result);
@@ -143,8 +131,10 @@ public class productImplService implements productService {
     // products updated = oldItem.updateWith(newItem);
     // return repository.save(updated);
     // }
-    return outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
-        .price(result.getPrice()).build();
+    return mapper.map(result, outputProduct.class);
+    // return
+    // outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
+    // .price(result.getPrice()).build();
 
   }
 

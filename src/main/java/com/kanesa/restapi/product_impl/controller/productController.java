@@ -6,7 +6,7 @@ import java.util.List;
 import com.kanesa.restapi.product_api.dto.request.inputProduct;
 import com.kanesa.restapi.product_api.dto.response.outputProduct;
 import com.kanesa.restapi.product_api.service.productService;
-
+import com.kanesa.restapi.standard_response.model.baseResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,25 +39,60 @@ public class productController {
   }
 
   @GetMapping(value = "/products/{id}")
-  public ResponseEntity<outputProduct> getDetailProduct(@PathVariable long id) {
+  public ResponseEntity<baseResponse<outputProduct>> getDetailProduct(@PathVariable long id) {
     outputProduct product = service.getOne(id);
 
-    return new ResponseEntity<outputProduct>(product, HttpStatus.OK);
+    // * Base Response
+    baseResponse<outputProduct> response = new baseResponse<>();
+    if (HttpStatus.OK.value() == 200) {
+      response.setSuccessOrNot(true);
+      response.setMessage("Success");
+      response.setData(product);
+    } else {
+      response.setSuccessOrNot(false);
+      response.setMessage("Failed");
+      response.setData(null);
+    }
+
+    return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
   }
 
   @PostMapping(value = "/products/add")
-  public ResponseEntity<outputProduct> addProduct(@RequestBody inputProduct inputproduct) {
+  public ResponseEntity<baseResponse<outputProduct>> addProduct(
+      @RequestBody inputProduct inputproduct) {
     outputProduct product = service.addOne(inputproduct);
 
-    return new ResponseEntity<outputProduct>(product, HttpStatus.OK);
+    baseResponse<outputProduct> response = new baseResponse<>();
+    if (HttpStatus.OK.value() == 200) {
+      response.setSuccessOrNot(true);
+      response.setMessage("Success");
+      response.setData(product);
+    } else {
+      response.setSuccessOrNot(false);
+      response.setMessage("Failed");
+      response.setData(null);
+    }
+
+    return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
   }
 
 
   @GetMapping(value = "/products")
-  public ResponseEntity<List<outputProduct>> getAllProduct() {
+  public ResponseEntity<baseResponse<List<outputProduct>>> getAllProduct() {
     List<outputProduct> products = service.getAll();
 
-    return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
+    baseResponse<List<outputProduct>> response = new baseResponse<>();
+    if (HttpStatus.OK.value() == 200) {
+      response.setSuccessOrNot(true);
+      response.setMessage("Success");
+      response.setData(products);
+    } else {
+      response.setSuccessOrNot(false);
+      response.setMessage("Failed");
+      response.setData(null);
+    }
+
+    return new ResponseEntity<baseResponse<List<outputProduct>>>(response, HttpStatus.OK);
   }
 
   @DeleteMapping(value = "/products/{id}")
@@ -68,11 +103,22 @@ public class productController {
   }
 
   @PatchMapping(value = "/products/{id}", consumes = "application/json")
-  public ResponseEntity<outputProduct> updateProduct(@PathVariable long id,
+  public ResponseEntity<baseResponse<outputProduct>> updateProduct(@PathVariable long id,
       @RequestBody inputProduct inputproduct) {
     outputProduct product = service.updateOne(id, inputproduct);
 
-    return new ResponseEntity<outputProduct>(product, HttpStatus.OK);
+    baseResponse<outputProduct> response = new baseResponse<>();
+    if (HttpStatus.OK.value() == 200) {
+      response.setSuccessOrNot(true);
+      response.setMessage("Success");
+      response.setData(product);
+    } else {
+      response.setSuccessOrNot(false);
+      response.setMessage("Failed");
+      response.setData(null);
+    }
+
+    return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
   }
 
 }
