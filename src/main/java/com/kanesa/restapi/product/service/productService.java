@@ -8,19 +8,18 @@ import javax.validation.constraints.NotBlank;
 import com.kanesa.restapi.product.controller.dto.request.inputProduct;
 import com.kanesa.restapi.product.controller.dto.response.outputProduct;
 
-
 public interface productService {
 
   @NotBlank(message = "product details is cannot be empty!")
-  outputProduct addOne(inputProduct inputproduct);
+  outputProduct addOne(inputProduct inputproduct) throws Exception;
 
-  outputProduct getOne(long id);
+  outputProduct getOne(long id) throws Exception;
 
   List<outputProduct> getAll();
 
   @NotBlank(message = "product details is cannot be empty!")
   outputProduct updateOne(long id, inputProduct inputproduct);
 
-  boolean deleteOne(long id);
+  boolean deleteOne(long id) throws Exception;
 
 }

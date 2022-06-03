@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 
 public class baseController {
   // * Throw Exception Handler
+
+  // * code: 400
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseStatus(code = HttpStatus.BAD_REQUEST)
   @ResponseBody
@@ -22,6 +24,7 @@ public class baseController {
         defaultMessage);
   }
 
+  // * code: 500
   @ExceptionHandler(Exception.class)
   @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
   @ResponseBody
