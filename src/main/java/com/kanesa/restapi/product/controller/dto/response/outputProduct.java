@@ -1,4 +1,4 @@
-package com.kanesa.restapi.product_api.dto.response;
+package com.kanesa.restapi.product.controller.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

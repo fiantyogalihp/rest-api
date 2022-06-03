@@ -1,12 +1,12 @@
 // ! this service as interface for product controller to product service (the bridge;interface) in a
 // interface
 
-package com.kanesa.restapi.product_api.service;
+package com.kanesa.restapi.product.service;
 
-import com.kanesa.restapi.product_api.dto.request.inputProduct;
-import com.kanesa.restapi.product_api.dto.response.outputProduct;
 import java.util.List;
 import javax.validation.constraints.NotBlank;
+import com.kanesa.restapi.product.controller.dto.request.inputProduct;
+import com.kanesa.restapi.product.controller.dto.response.outputProduct;
 
 
 public interface productService {

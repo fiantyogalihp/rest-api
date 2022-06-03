@@ -1,13 +1,12 @@
-package com.kanesa.restapi.product_impl.controller;
+package com.kanesa.restapi.product.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
-
-import com.kanesa.restapi.product_api.dto.request.inputProduct;
-import com.kanesa.restapi.product_api.dto.response.outputProduct;
-import com.kanesa.restapi.product_api.service.productService;
+import com.kanesa.restapi.product.controller.dto.request.inputProduct;
+import com.kanesa.restapi.product.controller.dto.response.outputProduct;
+import com.kanesa.restapi.product.service.productService;
 import com.kanesa.restapi.standard_response.controller.baseController;
 import com.kanesa.restapi.standard_response.model.baseResponse;
 

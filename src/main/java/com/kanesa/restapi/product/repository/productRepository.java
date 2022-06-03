@@ -1,7 +1,7 @@
-package com.kanesa.restapi.product_impl.repository;
+package com.kanesa.restapi.product.repository;
 
-import com.kanesa.restapi.product_impl.model.products;
 import org.springframework.data.repository.CrudRepository;
+import com.kanesa.restapi.product.repository.model.products;
 
 public interface productRepository extends CrudRepository<products, Long> {
 

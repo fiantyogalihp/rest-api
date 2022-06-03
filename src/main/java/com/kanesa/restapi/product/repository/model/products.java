@@ -1,5 +1,5 @@
 // ! Database model !!
-package com.kanesa.restapi.product_impl.model;
+package com.kanesa.restapi.product.repository.model;
 
 // import java.sql.Date;
 // import java.time.Instant;

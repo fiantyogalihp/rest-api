@@ -1,19 +1,17 @@
 // ! this service as a Service(the bussiness;logic) in a class(implementation)
 
-package com.kanesa.restapi.product_impl.service;
+package com.kanesa.restapi.product.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import com.kanesa.restapi.product_api.dto.request.inputProduct;
-import com.kanesa.restapi.product_api.dto.response.outputProduct;
-import com.kanesa.restapi.product_api.service.productService;
-import com.kanesa.restapi.product_impl.model.products;
-import com.kanesa.restapi.product_impl.repository.productRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.kanesa.restapi.product.controller.dto.request.inputProduct;
+import com.kanesa.restapi.product.controller.dto.response.outputProduct;
+import com.kanesa.restapi.product.repository.productRepository;
+import com.kanesa.restapi.product.repository.model.products;
 
 // * if use a Constructor
 /*

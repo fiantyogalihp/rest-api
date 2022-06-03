@@ -1,4 +1,4 @@
-package com.kanesa.restapi.product_api.dto.request;
+package com.kanesa.restapi.product.controller.dto.request;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
