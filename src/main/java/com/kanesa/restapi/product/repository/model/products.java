@@ -23,11 +23,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 @Builder
-@Entity
 @EnableJpaAuditing
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "products")
