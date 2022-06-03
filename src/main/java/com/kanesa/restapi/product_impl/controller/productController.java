@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import com.kanesa.restapi.product_api.dto.request.inputProduct;
 import com.kanesa.restapi.product_api.dto.response.outputProduct;
 import com.kanesa.restapi.product_api.service.productService;
+import com.kanesa.restapi.standard_response.controller.baseController;
 import com.kanesa.restapi.standard_response.model.baseResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/api")
-public class productController {
+public class productController extends baseController {
+  // ? extends baseController to catch the Exception
 
   @Autowired
   productService service;
@@ -51,10 +53,6 @@ public class productController {
       response.setSuccessOrNot(true);
       response.setMessage("Success");
       response.setData(product);
-    } else {
-      response.setSuccessOrNot(false);
-      response.setMessage("Failed");
-      response.setData(null);
     }
 
     return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
@@ -70,10 +68,6 @@ public class productController {
       response.setSuccessOrNot(true);
       response.setMessage("Success");
       response.setData(product);
-    } else {
-      response.setSuccessOrNot(false);
-      response.setMessage("Failed");
-      response.setData(null);
     }
 
     return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
@@ -89,10 +83,6 @@ public class productController {
       response.setSuccessOrNot(true);
       response.setMessage("Success");
       response.setData(products);
-    } else {
-      response.setSuccessOrNot(false);
-      response.setMessage("Failed");
-      response.setData(null);
     }
 
     return new ResponseEntity<baseResponse<List<outputProduct>>>(response, HttpStatus.OK);
@@ -115,12 +105,7 @@ public class productController {
       response.setSuccessOrNot(true);
       response.setMessage("Success");
       response.setData(product);
-    } else {
-      response.setSuccessOrNot(false);
-      response.setMessage("Failed");
-      response.setData(null);
     }
-
     return new ResponseEntity<baseResponse<outputProduct>>(response, HttpStatus.OK);
   }
 
