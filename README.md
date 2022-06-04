@@ -6,7 +6,7 @@ With Speaker : [Moh. Rizki K.]
 
 ## Module 1
 
-image:
+image:![Screenshot 2022-06-04 152728](https://user-images.githubusercontent.com/88466328/171991498-db135378-ec01-4e85-9e92-b4ebda3c03b7.jpg)
 
 ## Module 2
 
