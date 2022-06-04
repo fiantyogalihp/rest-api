@@ -10,7 +10,7 @@ image:![Screenshot 2022-06-04 152728](https://user-images.githubusercontent.com/
 
 ## Module 2
 
-image:
+path: path/src/main/java/com/kanesa/restapi/product/
 
 ## Module 3
 
