@@ -68,12 +68,21 @@
 			<version>1.18.24</version>
 		</dependency>
 
-		<!-- * model mapper -->
+		<!-- * model mapper : has a Issue, check on "src\main\java\com\kanesa\restapi\HELP.md"-->
 		<!-- <dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
-			<version>2.4.4</version>
+			<version>3.1.0</version>
 		</dependency> -->
+
+		<!-- * Utils -->
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.4</version>
+		</dependency>
+
 
 		<!-- * if we must import from other module, we must to make that module(imported module) be a <dependency> / library-->
 
