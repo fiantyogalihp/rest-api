@@ -9,7 +9,8 @@ import org.apache.commons.collections4.IterableUtils;
 // import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.kanesa.restapi.category.controller.dto.response.outputCategory;
+import com.kanesa.restapi.category.repository.model.category;
 import com.kanesa.restapi.product.controller.dto.request.inputProduct;
 import com.kanesa.restapi.product.controller.dto.response.outputProduct;
 import com.kanesa.restapi.product.repository.productRepository;
@@ -47,9 +48,13 @@ public class productServiceImpl implements productService {
   @Override
   public outputProduct addOne(inputProduct inputproduct) throws Exception {
 
+    // * convert category; model to inputProduct's model
+    category Category = category.builder().name(inputproduct.getCategoryName()).build();
     // * convert the inputProduct's model to products's model
+    // ? the flow of category Input is inputProduct(string getCategoryName) -> category(type data
+    // inside the products's model)
     // products product = this.modelMapper.map(inputproduct, products.class);
-    products product = products.builder().name(inputproduct.getName())
+    products product = products.builder().name(inputproduct.getName()).Category(Category)
         .price(inputproduct.getPrice()).desc(inputproduct.getDesc()).build();
 
     if (product.getName().isEmpty() && product.getPrice() == 0) {
@@ -59,11 +64,14 @@ public class productServiceImpl implements productService {
       // * add to DB use method "save()"
       this.product_repository.save(product);
 
+      // ? convert category's model to outputCategory's model(type data inside the outputProduct)
+      outputCategory outputcategory = outputCategory.builder().name(Category.getName()).build();
+
       // * convert the products's model to outputProduct's model
       // * return the reponse (outputProduct)
       // return this.modelMapper.map(product, outputProduct.class);
       return outputProduct.builder().id(product.getId()).name(product.getName())
-          .desc(product.getDesc()).price(product.getPrice()).build();
+          .outputCategory(outputcategory).desc(product.getDesc()).price(product.getPrice()).build();
     }
   }
 
@@ -98,8 +106,11 @@ public class productServiceImpl implements productService {
 
       // * return the data of model 'output_product' with builder
       // return this.modelMapper.map(result, outputProduct.class);
+      outputCategory outputcategory =
+          outputCategory.builder().name(result.getCategory().getName()).build();
+
       return outputProduct.builder().id(result.getId()).name(result.getName())
-          .desc(result.getDesc()).price(result.getPrice()).build();
+          .outputCategory(outputcategory).desc(result.getDesc()).price(result.getPrice()).build();
     }
   }
 
@@ -111,9 +122,11 @@ public class productServiceImpl implements productService {
 
     List<outputProduct> result = new ArrayList<>();
     productList.forEach(p -> {
+      outputCategory outputcategory =
+          outputCategory.builder().name(p.getCategory().getName()).build();
       // result.add(this.modelMapper.map(p, outputProduct.class));
-      result.add(outputProduct.builder().id(p.getId()).name(p.getName()).desc(p.getDesc())
-          .price(p.getPrice()).build());
+      result.add(outputProduct.builder().id(p.getId()).name(p.getName())
+          .outputCategory(outputcategory).desc(p.getDesc()).price(p.getPrice()).build());
     });
 
     return result;
@@ -124,18 +137,21 @@ public class productServiceImpl implements productService {
 
     Optional<products> resultTemp = this.product_repository.findById(id);
 
+    category Category = category.builder().name(newItem.getCategoryName()).build();
+
     if (resultTemp.isEmpty()) {
       System.out.println("The Data isn't exist!");
       throw new NullPointerException("Data is null!");
     } else {
       products result = resultTemp.map(oldItem -> {
         oldItem.setName(newItem.getName());
+        oldItem.setCategory(Category);
         oldItem.setDesc(newItem.getDesc());
         oldItem.setPrice(newItem.getPrice());
         return oldItem;
       }).orElseGet(() -> {
         // return this.modelMapper.map(newItem, products.class);
-        return products.builder().name(newItem.getName()).desc(newItem.getDesc())
+        return products.builder().name(newItem.getName()).Category(Category).desc(newItem.getDesc())
             .price(newItem.getPrice()).build();
       });
 
@@ -145,8 +161,11 @@ public class productServiceImpl implements productService {
       // return repository.save(updated);
       // }
       // return this.modelMapper.map(result, outputProduct.class);
+      outputCategory outputcategory =
+          outputCategory.builder().name(result.getCategory().getName()).build();
+
       return outputProduct.builder().id(result.getId()).name(result.getName())
-          .desc(result.getDesc()).price(result.getPrice()).build();
+          .outputCategory(outputcategory).desc(result.getDesc()).price(result.getPrice()).build();
     }
   }
 

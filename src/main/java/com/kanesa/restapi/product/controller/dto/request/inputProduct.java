@@ -18,8 +18,11 @@ public class inputProduct {
   @NotBlank(message = "Product 'name' cannot be empty! and the characters must be at least 2")
   private String name;
 
+  // @NotEmpty(message = "category 'name' cannot be empty!")
+  private String categoryName;
+
   private String desc;
 
   @NotEmpty(message = "Product 'price' is required! and cannot be empty")
-  private int price;
+  private Double price;
 }

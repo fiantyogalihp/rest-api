@@ -43,8 +43,8 @@ public class productController extends baseController {
 
     // * add a new item
     List<outputProduct> products = new ArrayList<>();
-    products.add(new outputProduct(1, "sapu", "kondisi: new", 10000));
-    products.add(new outputProduct(2, "sulak wulu", "kondisi: second", 6000));
+    products.add(new outputProduct());
+    products.add(new outputProduct());
 
     return new ResponseEntity<List<outputProduct>>(products, HttpStatus.OK);
   }
