@@ -5,6 +5,7 @@ package com.kanesa.restapi.product.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.apache.commons.collections4.IterableUtils;
 // import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ import com.kanesa.restapi.product.repository.model.products;
  */
 
 @Service
-public class productImplService implements productService {
+public class productServiceImpl implements productService {
 
   // * Constructor
   /*
@@ -35,8 +36,10 @@ public class productImplService implements productService {
   @Autowired
   private productRepository product_repository;
 
-  // ! [Error] Org.ModelMapper no Bean found; consider defining a bean of type
-  // 'org.modelmapper.ModelMapper' in your configuration
+  /*
+   * ! ! [Error] Org.ModelMapper no Bean found; consider defining a bean of type !
+   * 'org.modelmapper.ModelMapper' in your configuration
+   */
   // @Autowired
   // private ModelMapper modelMapper;
 
@@ -50,8 +53,8 @@ public class productImplService implements productService {
         .price(inputproduct.getPrice()).desc(inputproduct.getDesc()).build();
 
     if (product.getName().isEmpty() && product.getPrice() == 0) {
-      System.out.println("name and price is empty");
-      throw new Exception("name and price cannot be empty");
+      System.out.println("name and price is empty!");
+      throw new NullPointerException("name and price is null!");
     } else {
       // * add to DB use method "save()"
       this.product_repository.save(product);
@@ -75,8 +78,8 @@ public class productImplService implements productService {
     Optional<products> resultTemp = this.product_repository.findById(id);
     // * [Validation] if the id is not exist, return null
     if (resultTemp.isEmpty()) {
-      System.out.println("The Data isn't exist");
-      throw new NullPointerException("Data not found");
+      System.out.println("The Data isn't exist!");
+      throw new NullPointerException("Data is null!");
     } else {
       /*
        * * [Validation] if the id is exist,cause resultTemp is 'Optional' convert to 'products', to
@@ -102,9 +105,12 @@ public class productImplService implements productService {
 
   @Override
   public List<outputProduct> getAll() {
+    Iterable<products> products = this.product_repository.findAll();
+
+    List<products> productList = IterableUtils.toList(products);
 
     List<outputProduct> result = new ArrayList<>();
-    this.product_repository.findAll().forEach(p -> {
+    productList.forEach(p -> {
       // result.add(this.modelMapper.map(p, outputProduct.class));
       result.add(outputProduct.builder().id(p.getId()).name(p.getName()).desc(p.getDesc())
           .price(p.getPrice()).build());
@@ -119,28 +125,29 @@ public class productImplService implements productService {
     Optional<products> resultTemp = this.product_repository.findById(id);
 
     if (resultTemp.isEmpty()) {
-      System.out.println("The Data isn't exist");
-      return null;
-    }
-    products result = resultTemp.map(oldItem -> {
-      oldItem.setName(newItem.getName());
-      oldItem.setDesc(newItem.getDesc());
-      oldItem.setPrice(newItem.getPrice());
-      return oldItem;
-    }).orElseGet(() -> {
-      // return this.modelMapper.map(newItem, products.class);
-      return products.builder().name(newItem.getName()).desc(newItem.getDesc())
-          .price(newItem.getPrice()).build();
-    });
+      System.out.println("The Data isn't exist!");
+      throw new NullPointerException("Data is null!");
+    } else {
+      products result = resultTemp.map(oldItem -> {
+        oldItem.setName(newItem.getName());
+        oldItem.setDesc(newItem.getDesc());
+        oldItem.setPrice(newItem.getPrice());
+        return oldItem;
+      }).orElseGet(() -> {
+        // return this.modelMapper.map(newItem, products.class);
+        return products.builder().name(newItem.getName()).desc(newItem.getDesc())
+            .price(newItem.getPrice()).build();
+      });
 
-    this.product_repository.save(result);
-    // (oldItem) -> {
-    // products updated = oldItem.updateWith(newItem);
-    // return repository.save(updated);
-    // }
-    // return this.modelMapper.map(result, outputProduct.class);
-    return outputProduct.builder().id(result.getId()).name(result.getName()).desc(result.getDesc())
-        .price(result.getPrice()).build();
+      this.product_repository.save(result);
+      // (oldItem) -> {
+      // products updated = oldItem.updateWith(newItem);
+      // return repository.save(updated);
+      // }
+      // return this.modelMapper.map(result, outputProduct.class);
+      return outputProduct.builder().id(result.getId()).name(result.getName())
+          .desc(result.getDesc()).price(result.getPrice()).build();
+    }
   }
 
   @Override
@@ -159,7 +166,7 @@ public class productImplService implements productService {
     Optional<products> resultTemp = this.product_repository.findById(id);
 
     if (resultTemp.isEmpty()) {
-      System.out.println("The Data isn't exist");
+      System.out.println("The Data isn't exist!");
       throw new NullPointerException("Data is null!");
     } else {
       products result = resultTemp.get();

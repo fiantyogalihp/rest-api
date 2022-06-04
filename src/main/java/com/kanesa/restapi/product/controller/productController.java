@@ -59,13 +59,13 @@ public class productController extends baseController {
       if (id != 0) {
         response.setCode(HttpStatus.OK.value());
         response.setSuccessOrNot(true);
-        response.setMessage("Success");
+        response.setMessage("Success!");
         outputProduct product = this.service.getOne(id);
         response.setData(product);
       }
     } catch (Exception e) {
       if (e instanceof NullPointerException) {
-        throw new NullPointerException("Data not found");
+        throw new NullPointerException("Data not found!");
       } else {
         this.baseController.handleExceptionError(e);
       }
@@ -82,13 +82,13 @@ public class productController extends baseController {
       if (inputproduct.getName().isEmpty() && inputproduct.getPrice() == 0) {
         response.setCode(HttpStatus.OK.value());
         response.setSuccessOrNot(true);
-        response.setMessage("Success");
+        response.setMessage("Success!");
         outputProduct product = this.service.addOne(inputproduct);
         response.setData(product);
       }
     } catch (Exception e) {
       if (e instanceof NullPointerException) {
-        throw new NullPointerException("name / price cannot be empty");
+        throw new NullPointerException("name / price cannot be empty!");
       } else {
         this.baseController.handleExceptionError(e);
       }
@@ -104,13 +104,13 @@ public class productController extends baseController {
       if (this.service.getAll() != null) {
         response.setCode(HttpStatus.OK.value());
         response.setSuccessOrNot(true);
-        response.setMessage("Success");
+        response.setMessage("Success!");
         List<outputProduct> products = this.service.getAll();
         response.setData(products);
       }
     } catch (Exception e) {
       if (e instanceof NullPointerException) {
-        throw new NullPointerException("Data not found");
+        throw new NullPointerException("Data not found!");
       } else {
         this.baseController.handleExceptionError(e);
       }
@@ -123,15 +123,15 @@ public class productController extends baseController {
     try {
       if (id != 0 && this.service.getOne(id) != null) {
         this.service.deleteOne(id);
-        return new ResponseEntity<String>("Success", HttpStatus.OK);
+        return new ResponseEntity<String>("Success!", HttpStatus.OK);
       }
     } catch (Exception e) {
       if (e instanceof NullPointerException) {
-        throw new NullPointerException("Data not found");
+        throw new NullPointerException("Data not found!");
       } else {
         this.baseController.handleExceptionError(e);
       }
-      return new ResponseEntity<String>("Failed", HttpStatus.NOT_FOUND);
+      return new ResponseEntity<String>("Failed!", HttpStatus.NOT_FOUND);
     }
     return null;
   }
@@ -145,13 +145,13 @@ public class productController extends baseController {
       if (id != 0 && inputproduct != null) {
         response.setCode(HttpStatus.OK.value());
         response.setSuccessOrNot(true);
-        response.setMessage("Success");
+        response.setMessage("Success!");
         outputProduct product = this.service.updateOne(id, inputproduct);
         response.setData(product);
       }
     } catch (Exception e) {
       if (e instanceof NullPointerException) {
-        throw new NullPointerException("update cannot be blank");
+        throw new NullPointerException("update cannot be blank!");
       } else {
         this.baseController.handleExceptionError(e);
       }
