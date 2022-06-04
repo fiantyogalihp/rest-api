@@ -79,7 +79,7 @@ public class productController extends baseController {
 
     baseResponse<outputProduct> response = new baseResponse<>();
     try {
-      if (inputproduct.getName().isEmpty() && inputproduct.getPrice() == 0) {
+      if (inputproduct.getName() != null && inputproduct.getPrice() != 0) {
         response.setCode(HttpStatus.OK.value());
         response.setSuccessOrNot(true);
         response.setMessage("Success!");
