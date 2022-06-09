@@ -1,7 +1,7 @@
 # Spring-Boot Project from Scratch
 
 Bootcamp Magiator Research & Development SISWA SMK MALANG
-With Speaker : [Moh. Rizki K.]
+With Speaker : [Moh. Rizki K.] From Alterra Academy
  A Magister Vocational Education Student (UM)
 
 ## Module 1
